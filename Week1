@@ -1,0 +1,51 @@
+male(nicholas).
+male(louis).
+male(elie).
+male(troy).
+male(steven).
+male(david).
+
+female(chelsea).
+female(amy).
+female(zelda).
+female(pearl).
+female(christy).
+female(rhonda).
+female(sheila).
+
+married(zelda, louis).
+married(pearl, elie).
+married(christy, troy).
+married(rhonda, steven).
+married(sheila, david).
+
+parentOf(louis, nicholas).
+parentOf(zelda, nicholas).
+parentOf(louis, chelsea).
+parentOf(zelda, chelsea).
+parentOf(louis, amy).
+parentOf(zelda, amy).
+parentOf(elie, louis).
+parentOf(pearl, louis).
+
+childOf(nicholas, zelda).
+childOf(chelsea, zelda).
+childOf(amy, zelda).
+
+sibling(zelda, troy).
+sibling(zelda, sheila).
+sibling(zelda, steven).
+
+brotherOf(X, Y) :- sibling(X, Y), male(X).
+brotherOf(X, Y) :- parentOf(Z, X), parentOf(Z, Y), male(X).
+
+sisterOf(X, Y) :- sibling(X, Y), female(X).
+sisterOf(X, Y) :- parentOf(Z, X), parentOf(Z, Y), female(X).
+
+grandParentOf(X, Y) :- parentOf(X, Z), parentOf(Z, Y).
+
+auntOf(X, Y) :– female(X), sibling(X, Z), parent(Z, Y).
+auntOf(X, Y) :– female(X), married(X, W), sibling(W, Z), parent(Z, Y).
+
+uncleOf(X, Y) :– male(X), sibling(X, Z), parent(Z, Y).
+uncleOf(X, Y) :– male(X), married(X, W), sibling(W, Z), parent(Z, Y).
